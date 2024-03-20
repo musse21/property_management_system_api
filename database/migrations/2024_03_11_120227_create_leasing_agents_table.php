@@ -21,9 +21,22 @@ return new class extends Migration
             $table->string('last_name');
             $table->string('email');
             $table->string('phone_number');
+
+            //personal info
+            $table->string('marital_status');
+            $table->string('childrens');
             $table->string('age')->nullable();
             $table->string('gender');
+
+            //identification
             $table->string('image');
+
+            //address
+            $table->string('house_number');
+            $table->string('city');
+            $table->string('sub_city');
+            $table->string('wereda');
+            $table->string('kebele');
             $table->softDeletes();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('restrict');
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('restrict');

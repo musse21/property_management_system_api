@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class rentOffice extends Model
 {
     use HasFactory;
-    
+
     protected $filalble = [
         'first_name',
         'last_name',
         'email',
-        'phone',
+        'phone_number',
         'price',
         'floor_number',
         'room_number',
@@ -26,7 +26,7 @@ class rentOffice extends Model
     }
 
     public function updated_by() {
-        return $this->belongsTo(User::class, 'updated_by', 'id');   
+        return $this->belongsTo(User::class, 'updated_by', 'id');
     }
 
 }

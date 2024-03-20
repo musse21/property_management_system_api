@@ -11,13 +11,27 @@ class leasingManager extends Model
 
 
     protected $fillable = [
+        //general info
         'first_name',
         'last_name',
         'email',
         'phone_number',
+
+        //personal info
+        'marital_status',
+        'childrens',
         'age',
         'gender',
+
+        //identification
         'image',
+
+        //address
+        'house_number',
+        'city',
+        'sub_city',
+        'wereda',
+        'kebele'
     ];
 
     public function created_by() {
@@ -25,6 +39,6 @@ class leasingManager extends Model
     }
 
     public function updated_by() {
-        return $this->belongsTo(User::class, 'updated_by', 'id');   
+        return $this->belongsTo(User::class, 'updated_by', 'id');
     }
 }
