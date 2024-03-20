@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email')->nullable()->unique();
-            $table->string('phone')->unique();
+            $table->string('phone_number')->unique();
             $table->string('price');
             $table->integer('floor_number')->nullable();
             $table->integer('room_number')->nullable();
