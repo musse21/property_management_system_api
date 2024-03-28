@@ -16,10 +16,10 @@ abstract class Repository implements IRepository
      *
      * @param  Model  $model
      */
-    public function __construct(Model $model)
-    {
-        $this->model = $model;
-    }
+//    public function __construct(Model $model)
+//    {
+//        $this->model = $model;
+//    }
 
     /**
      * @param  int|null  $id
