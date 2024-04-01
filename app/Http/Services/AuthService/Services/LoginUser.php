@@ -3,6 +3,7 @@
 namespace App\Http\Services\AuthService\Services;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -13,16 +14,20 @@ trait LoginUser
      */
     public function authenticate($data)
     {
-        $user = User::query()->where('email', '=', $data['email'])->first();
-        if ($user instanceof User) {
-            if ($user->isVerified) {
-                if (Hash::check($data['password'], $user['password'])) {
-                    $token = $user->createToken('web')->plainTextToken;
-                    return ['user' => $user, 'token' => $token];
-                }
+        $email = $data['email'];
+        $password = $data['password'];
+
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            $user = Auth::user();
+            $token = JWTAuth::fromUser($user);
+            if ($user->email_verified_at !== null) {
+                return [$user, $token];
+            } else {
+                Auth::logout();
+                return null;
             }
-            throw new \Exception('Whoops! user is not verified!');
+        } else {
+            return false;
         }
-        throw new \Exception('Whoops! unable to find user!');
     }
 }

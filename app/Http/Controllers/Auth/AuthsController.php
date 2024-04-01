@@ -48,10 +48,10 @@ class AuthsController extends Controller
     {
         try {
             $reqData = $login->validated();
-            $userToken = $this->authsService->authenticate($reqData);
+            $user = $this->authsService->authenticate($reqData);
 
-            if ($userToken) {
-                $response = new ResponseMessage(true, 'logged in successfully', $userToken);
+            if ($user) {
+                $response = new ResponseMessage(true, 'logged in successfully', $user);
 
                 return response()->json($response->getMessage(), Response::HTTP_OK);
             }
@@ -75,7 +75,7 @@ class AuthsController extends Controller
         $user = $this->authsService->authenticateUser($reqData);
 
             if ($user !== null) {
-                $response = new ResponseMessage(true, 'authenticated successfully', ['user' => $user]);
+                $response = new ResponseMessage(true, 'authenticated successfully', ['token' => $user]);
 
                 return response()->json($response->getMessage(), Response::HTTP_OK);
             } else {
